@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.mybatissample.dao.AccountMapper">
+    <resultMap id="AccountMap" type="org.example.mybatissample.model.Account">
+        <id property="id" column="accountId"/>
+        <result property="userId" column="a_user_id"/>
+        <result property="name" column="a_name"/>
+        <result property="accountType" column="a_acnt_type"/>
+        <result property="password" column="a_password"/>
+        <result property="name" column="name"/>
+        <result property="email" column="a_email"/>
+        <result property="lastLoginAt" column="a_last_login_at"/>
+        <result property="createdAt" column="a_created_at"/>
+        <result property="updatedAt" column="a_updated_at"/>
+        <result property="deletedAt" column="a_deleted_at"/>
+        <result property="lastPasswordUpdatedAt" column="a_last_password_updated_at"/>
+        <result property="trialCount" column="a_trial_cnt"/>
+        <collection property="roles" columnPrefix="ar_" resultMap="org.example.mybatissample.dao.RoleMapper.RoleMap"/>
+    </resultMap>
+
+    <sql id="base">
+        a.id as accountId,
+        a.user_id as a_user_id,
+        a.name as a_name,
+        a.acnt_type as a_acnt_type,
+        a.password as a_password,
+        a.email as a_email,
+        a.last_login_at as a_last_login_at,
+        a.created_at as a_created_at,
+        a.updated_at as a_updated_at,
+        a.deleted_at as a_deleted_at,
+        a.last_password_updated_at as a_last_password_updated_at,
+        a.trial_cnt as a_trial_cnt
+    </sql>
+
+    <sql id="selectBase">
+        SELECT a.id                       as accountId,
+               a.user_id                  as a_user_id,
+               a.name                     as a_name,
+               a.acnt_type                as a_acnt_type,
+               a.password                 as a_password,
+               a.email                    as a_email,
+               a.last_login_at            as a_last_login_at,
+               a.created_at               as a_created_at,
+               a.updated_at               as a_updated_at,
+               a.deleted_at               as a_deleted_at,
+               a.last_password_updated_at as a_last_password_updated_at,
+               a.trial_cnt                as a_trial_cnt,
+               r.id as ar_roleId,
+               r.name as ar_r_name,
+               r.description as ar_r_desc,
+               r.created_at as ar_r_created_at,
+               r.updated_at as ar_r_updated_at
+    </sql>
+
+    <sql id="baseTableFrom">
+        FROM accounts a
+    </sql>
+
+    <sql id="joinTable">
+        LEFT JOIN accounts_roles ar ON ar.account_id = a.id
+        LEFT JOIN roles r ON ar.role_id = r.id
+    </sql>
+
+    <sql id="defaultCondition">
+        WHERE 1 = 1
+    </sql>
+
+    <sql id="orderClause">
+        ORDER BY a.id desc, a.created_at desc
+    </sql>
+
+    <select id="findAll" resultMap="AccountMap">
+        <include refid="selectBase"/>
+        <include refid="baseTableFrom"/>
+        <include refid="joinTable"/>
+        <include refid="defaultCondition"/>
+        <include refid="orderClause"/>
+    </select>
+
+    <select id="findById" resultMap="AccountMap">
+        <include refid="selectBase"/>
+        <include refid="baseTableFrom"/>
+        <include refid="defaultCondition"/>
+        AND a.id = #{id}
+        <include refid="orderClause"/>
+<!--        <include refid="org.example.mybatissample.dao.RoleMapper.baseTableFrom" />-->
+    </select>
+
+    <select id="findByUsername" resultMap="AccountMap">
+        <include refid="selectBase"/>
+        <include refid="baseTableFrom"/>
+        <include refid="defaultCondition"/>
+        AND a.id = #{name}
+        <include refid="orderClause"/>
+    </select>
+
+    <insert id="save">
+        INSERT INTO accounts (
+                                a.name,
+                                a.acnt_type,
+                                a.password,
+                                a.name,
+                                a.email )
+        VALUES (#{name},
+                #{accountType},
+                #{password},
+                #{name},
+                #{email})
+    </insert>
+
+    <update id="update">
+        UPDATE accounts
+        SET user_id = 'aaa', updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE
+        FROM accounts
+        WHERE id = #{roleId}
+    </delete>
+
+
+</mapper>
+

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.example.mybatissample.dao.RoleMapper">
+    <resultMap id="RoleMap" type="org.example.mybatissample.model.Role">
+        <id property="id" column="roleId"/>
+        <result property="name" column="r_name"/>
+        <result property="description" column="r_desc"/>
+        <result property="createdAt" column="r_created_at"/>
+        <result property="updatedAt" column="r_updated_at"/>
+    </resultMap>
+
+    <sql id="base">
+        r.id as roleId,
+        r.name as r_name,
+        r.description as r_desc,
+        r.created_at as r_created_at,
+        r.updated_at as r_updated_at
+    </sql>
+
+    <sql id="selectBase">
+        SELECT
+            r.id as roleId,
+            r.name as r_name,
+            r.description as r_desc,
+            r.created_at as r_created_at,
+            r.updated_at as r_updated_at
+    </sql>
+
+    <sql id="baseTableFrom">
+        FROM roles r
+    </sql>
+
+    <sql id="joinTable">
+
+    </sql>
+
+    <sql id="defaultCondition">
+        WHERE 1 = 1
+    </sql>
+
+    <sql id="orderClause">
+        ORDER BY r.id desc, r.created_at desc
+    </sql>
+
+    <select id="findAll" resultMap="RoleMap">
+        <include refid="selectBase" />
+        <include refid="baseTableFrom" />
+    </select>
+
+    <select id="findById" resultMap="RoleMap">
+        <include refid="selectBase" />
+        <include refid="baseTableFrom" />
+        <include refid="defaultCondition" />
+        AND r.id = #{id}
+    </select>
+
+    <select id="findByName" resultMap="RoleMap">
+        <include refid="selectBase" />
+        <include refid="baseTableFrom" />
+        <include refid="defaultCondition" />
+        AND r.name = #{name}
+    </select>
+
+    <insert id="save">
+        INSERT INTO roles (name, desc)
+        VALUES (#{name}, #{description})
+    </insert>
+
+    <update id="update">
+        UPDATE
+            roles
+        SET
+            name = #{name},
+            desc = #{description}
+        WHERE
+            id = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM roles
+        WHERE id = #{roleId}
+    </delete>
+</mapper>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL" />
+        <setting name="returnInstanceForEmptyRow" value="true"/>
+    </settings>
+<!--    @Component로 등록하여 사용하기에 주석 처리-->
+<!--    <plugins>-->
+<!--        <plugin interceptor="org.example.mybatissample.interceptor.UpdateTimestampInterceptor">-->
+<!--        </plugin>-->
+<!--    </plugins>-->
+</configuration>
