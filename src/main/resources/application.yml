@@ -5,7 +5,7 @@ spring:
     default: local
 
 server:
-  port: 8080
+  port: ${SERVER_PORT:localhost}
 
 mybatis:
   type-aliases-package: org.example.mybatissample.model.*
@@ -19,10 +19,10 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mariadb://localhost:3306/test
+    url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_DATABASE:test}
     driver-class-name: org.mariadb.jdbc.Driver
-    username: root
-    password: root
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
 
 logging:
   level:
