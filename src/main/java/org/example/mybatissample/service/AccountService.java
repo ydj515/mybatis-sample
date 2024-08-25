@@ -1,7 +1,7 @@
 package org.example.mybatissample.service;
 
 import lombok.RequiredArgsConstructor;
-import org.example.mybatissample.dao.AccountMapper;
+import org.example.mybatissample.mapper.AccountMapper;
 import org.example.mybatissample.model.Account;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package org.example.mybatissample.dao;
+package org.example.mybatissample.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.example.mybatissample.model.Role;
