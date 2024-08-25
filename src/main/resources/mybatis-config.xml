@@ -4,9 +4,26 @@
 <configuration>
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
-        <setting name="jdbcTypeForNull" value="NULL" />
         <setting name="returnInstanceForEmptyRow" value="true"/>
+        <setting name="jdbcTypeForNull" value="NULL" />
+<!--        <setting name="cacheEnabled" value="true"/>-->
+<!--        <setting name="lazyLoadingEnabled" value="true"/>-->
+        <setting name="multipleResultSetsEnabled" value="true"/>
+        <setting name="useColumnLabel" value="true"/>
+        <setting name="useGeneratedKeys" value="true"/>
+        <setting name="autoMappingBehavior" value="FULL"/>
+        <setting name="autoMappingUnknownColumnBehavior" value="WARNING"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <setting name="logImpl" value="SLF4J"/>
     </settings>
+
+    <typeAliases>
+        <typeAlias alias="hashmap" type="java.util.HashMap" />
+        <typeAlias alias="int" type="java.lang.Integer" />
+        <typeAlias alias="account" type="org.example.mybatissample.model.Account" />
+
+    </typeAliases>
 <!--    @Component로 등록하여 사용하기에 주석 처리-->
 <!--    <plugins>-->
 <!--        <plugin interceptor="org.example.mybatissample.interceptor.UpdateTimestampInterceptor">-->
