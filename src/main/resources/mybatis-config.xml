@@ -21,7 +21,8 @@
     <typeAliases>
         <typeAlias alias="hashmap" type="java.util.HashMap" />
         <typeAlias alias="int" type="java.lang.Integer" />
-        <typeAlias alias="account" type="org.example.mybatissample.model.Account" />
+        <package name="org.example.mybatissample.model"/>
+<!--        <typeAlias alias="account" type="org.example.mybatissample.model.Account" />-->
 
     </typeAliases>
 <!--    @Component로 등록하여 사용하기에 주석 처리-->

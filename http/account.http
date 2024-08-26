@@ -1,0 +1,18 @@
+### 변수 설정
+@accountId = 1
+@username = "admin"
+
+### 회원 전체 조회
+GET {{host}}/api/accounts
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### 회원 조회
+GET {{host}}/api/accounts/{{accountId}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
+
+### 회원 param으로 조회
+GET {{host}}/api/accounts/detail/username={{username}}
+Content-Type: application/json
+Authorization: Bearer {{accessToken}}
